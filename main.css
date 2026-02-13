@@ -202,7 +202,14 @@ body {
     /* Hidden initially */
     transition: opacity 2s ease-in;
     width: 100%;
-    min-height: 100vh;
+    height: 100vh;
+    /* Full viewport height */
+    position: fixed;
+    /* Fix to screen */
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    /* Hide scrolling text */
 }
 
 #portrait-section.visible {
@@ -236,6 +243,22 @@ body {
     padding: 20px;
     /* Helper padding just in case, removable if needed */
     box-sizing: border-box;
+
+    /* Animation settings */
+    position: absolute;
+    top: 100%;
+    animation: movieCredits 150s linear infinite;
+}
+
+@keyframes movieCredits {
+    0% {
+        top: 100%;
+    }
+
+    100% {
+        top: -400%;
+        /* Adjust based on text length to ensure it clears */
+    }
 }
 
 @keyframes fadeInPage {
