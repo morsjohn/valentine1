@@ -1,0 +1,247 @@
+/* Global Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: #000;
+    overflow-x: hidden;
+}
+
+/* --- Opening Section Styles --- */
+#opening-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at center, #2b102b 0%, #000 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    z-index: 1000;
+    perspective: 1500px;
+    opacity: 1;
+    transition: opacity 1.5s ease-out;
+}
+
+.carousel-title {
+    font-family: 'Dancing Script', cursive;
+    color: #ffb6c1;
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    text-shadow: 0 0 10px rgba(255, 105, 180, 0.7);
+    z-index: 1001;
+    animation: fadeInDown 2s ease-out;
+}
+
+.carousel-container {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.carousel {
+    position: absolute;
+    width: 200px;
+    height: 300px;
+    transform-style: preserve-3d;
+    animation: rotateCarousel 20s linear infinite;
+}
+
+.card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-origin: center;
+    transform: rotateY(calc(var(--i) * 60deg)) translateZ(350px);
+    /* 360 / 6 items = 60deg */
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+    backdrop-filter: blur(5px);
+    overflow: hidden;
+    transition: transform 0.5s;
+    -webkit-box-reflect: below 2px linear-gradient(transparent, transparent, rgba(0, 0, 0, 0.4));
+}
+
+.card:hover {
+    box-shadow: 0 0 30px rgba(255, 182, 193, 0.9);
+}
+
+.card-content {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.card-content img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.card-deco {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 60%, rgba(255, 105, 180, 0.4) 100%);
+    pointer-events: none;
+}
+
+/* Animations */
+@keyframes rotateCarousel {
+    0% {
+        transform: rotateY(0deg) rotateX(5deg);
+    }
+
+    50% {
+        transform: rotateY(180deg) rotateX(-5deg);
+    }
+
+    100% {
+        transform: rotateY(360deg) rotateX(5deg);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Button */
+#enter-btn {
+    margin-top: 50px;
+    padding: 12px 35px;
+    font-size: 1.4rem;
+    font-family: 'Playfair Display', serif;
+    background: linear-gradient(45deg, #ff6b6b, #d63384);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 5px 20px rgba(214, 51, 132, 0.5);
+    transition: transform 0.3s, box-shadow 0.3s;
+    z-index: 1001;
+    animation: fadeInUp 2s ease-out;
+}
+
+#enter-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(214, 51, 132, 0.7);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Particles */
+.particle {
+    position: absolute;
+    pointer-events: none;
+    z-index: 900;
+    animation: floatUp linear forwards;
+    opacity: 0.8;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0.8;
+    }
+
+    80% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* --- Portrait Section Styles (PRESERVED) --- */
+#portrait-section {
+    opacity: 0;
+    display: none;
+    /* Hidden initially */
+    transition: opacity 2s ease-in;
+    width: 100%;
+    min-height: 100vh;
+}
+
+#portrait-section.visible {
+    opacity: 1;
+    display: block;
+    animation: fadeInPage 2s ease-in;
+}
+
+/* Existing Portrait Rules Scoped to #portrait-section */
+#portrait-section p {
+    margin: 0;
+    width: 100%;
+    font-size: 12px;
+    line-height: 8px;
+    /* Original tighter value */
+    text-align: justify;
+
+    /* Image Background for Text */
+    background: url(image.jpg) no-repeat center center fixed;
+    background-size: 100% 100%;
+    -webkit-background-size: 100% 100%;
+
+    background-clip: text;
+    -webkit-background-clip: text;
+
+    color: rgba(255, 255, 255, 0.05);
+    /* Transparent fill fallback */
+    -webkit-text-fill-color: transparent;
+
+    font-weight: bold;
+    padding: 20px;
+    /* Helper padding just in case, removable if needed */
+    box-sizing: border-box;
+}
+
+@keyframes fadeInPage {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
